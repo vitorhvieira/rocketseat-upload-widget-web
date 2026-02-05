@@ -6,7 +6,8 @@ on:
       - main
 
 env:
-  AWS_S3_BUCKET: 'rocketseat-upload-widget-web-vitorh-static'
+  AWS_S3_BUCKET_STATIC: 'rocketseat-upload-widget-web-vitorh-static'
+  AWS_S3_BUCKET_CDN: 'rocketseat-upload-widget-web-vitorh-static-cdn'
   SOURCE_DIST: './dist'
 
 jobs:
@@ -46,8 +47,14 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{vars.AWS_REGION }}
-      - name: Sync file to S3
-        id: sync-file-to-s3
+
+      - name: Sync file to S3 static
+        id: sync-file-to-s3-static
         run: |
-          aws s3 sync ${{ env.SOURCE_DIST }} s3://${{ env.AWS_S3_BUCKET }}/ --delete
+          aws s3 sync ${{ env.SOURCE_DIST }} s3://${{ env.AWS_S3_BUCKET_STATIC }}/ --delete
+
+      - name: Sync file to S3 CDN
+        id: sync-file-to-s3-cdn
+        run: |
+          aws s3 sync ${{ env.SOURCE_DIST }} s3://${{ env.AWS_S3_BUCKET_CDN }}/ --delete
 
