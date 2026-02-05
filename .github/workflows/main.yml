@@ -41,17 +41,17 @@ jobs:
       - name: Pull Vercel Config
         id: pull-vercel-config
         run: |
-          vercel pull --yes --environment=production --token=${{ secrets.VERCE_TOKEN }}
+          vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build App
         id: build-app
         run: |
-          vercel build --prod --token=${{ secrets.VERCE_TOKEN }}
+          vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy APP
         id: deploy-app
         run: |
-          vercel deploy --prebuilt -- prod --token=${{ secrets.VERCE_TOKEN }}
+          vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
       
       # - name: Install Dependencies
       #   id: install-dependencies
