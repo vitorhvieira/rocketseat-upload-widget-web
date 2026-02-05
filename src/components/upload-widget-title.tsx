@@ -15,7 +15,7 @@ export function UploadWidgetTitle() {
           </span>
         </span>
       ) : (
-        <span>Upload files</span>
+        <span>Faça upload dos seus arquivos aqui!!</span>
       )}
     </div>
   );
